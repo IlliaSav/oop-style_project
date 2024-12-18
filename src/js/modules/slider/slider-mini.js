@@ -46,7 +46,7 @@ export default class MiniSlider extends Slider {
         })
     }
 
-    timer(){
+    timer() {
         this.interval = setInterval(() => {
             this.nextSlide();
         }, 5000);
