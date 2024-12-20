@@ -1,8 +1,8 @@
 import Slider from "./slider";
 
 export default class MainSlider extends Slider {
-    constructor(btns) {
-        super(btns);
+    constructor(btnNext, btnPrev) {
+        super(btnNext, btnNext, btnPrev);
     }
 
     showSlides(n) {
@@ -39,23 +39,33 @@ export default class MainSlider extends Slider {
         this.showSlides(this.slidesIndex += n);
     }
 
-    render() {
-        try {
-            this.hanson = document.querySelector('.hanson');
-        }catch(e) {}
-        
-        this.btns.forEach(item => {
+    bindTriggers(dirBtn, n) {
+        dirBtn.forEach(item => {
             item.addEventListener('click', (e) => {
-                this.plusSlides(1);
-            });
-
-            item.parentNode.previousElementSibling.addEventListener('click', (e) => {
+                e.stopPropagation();
                 e.preventDefault();
-                this.slidesIndex = 1;
-                this.showSlides(this.slidesIndex);
+                this.plusSlides(n);
             });
-        });
 
-        this.showSlides(this.slidesIndex);
+            try {
+                item.parentNode.previousElementSibling.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.slidesIndex = 1;
+                    this.showSlides(this.slidesIndex);
+                });
+            } catch(e) {}
+        });
+    }
+
+    render() {
+        if (this.container) {
+            try {
+                this.hanson = document.querySelector('.hanson');
+            }catch(e) {}
+            
+            this.showSlides(this.slidesIndex);
+            this.bindTriggers(this.btnNext, 1);
+            this.bindTriggers(this.btnPrev, -1);
+        }
     }
 }

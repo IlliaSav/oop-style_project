@@ -7,9 +7,16 @@ import Form from "./modules/forms";
 window.addEventListener('DOMContentLoaded', () => {
     const slider = new MainSlider({
         container: '.page',
-        btns: '.next'
+        btnNext: '.next'
     });
     slider.render();
+
+    const modulePageSlider = new MainSlider({
+        container: '.moduleapp',
+        btnNext: '.next',
+        btnPrev: '.prevmodule'
+    });
+    modulePageSlider.render();
 
     const showUpSlider = new MiniSlider({
         container: '.showup__content-slider',
