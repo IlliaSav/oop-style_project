@@ -58,5 +58,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
     new Download('.download').init();
 
-    new OpenPages('#open__modules', 'modules.html').init();
+    new OpenPages('.open__modules', 'modules.html').init();
 });
